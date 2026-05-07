@@ -837,12 +837,12 @@
   if(!el)return;
   var isDown=false,startX,scrollLeft;
   el.addEventListener('mousedown',function(e){
-    isDown=true;el.style.cursor='grabbing';
+    isDown=true;el.style.cursor='grabbing';el.style.userSelect='none';
     startX=e.pageX-el.offsetLeft;
     scrollLeft=el.scrollLeft;
   });
-  el.addEventListener('mouseleave',function(){isDown=false;el.style.cursor='grab'});
-  el.addEventListener('mouseup',function(){isDown=false;el.style.cursor='grab'});
+  el.addEventListener('mouseleave',function(){isDown=false;el.style.cursor='grab';el.style.userSelect=''});
+  el.addEventListener('mouseup',function(){isDown=false;el.style.cursor='grab';el.style.userSelect=''});
   el.addEventListener('mousemove',function(e){
     if(!isDown)return;
     e.preventDefault();
