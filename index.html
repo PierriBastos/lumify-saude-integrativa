@@ -420,13 +420,15 @@
           Snapshot no hover: card 3 em destaque
         </div>
 </div>
-<div class="mt-10 overflow-hidden rounded-3xl border border-[#2F3E35]/10 bg-white/35 shadow-sm shadow-[#2F3E35]/5">
+<div class="mt-10 rounded-3xl border border-[#2F3E35]/10 bg-white/35 shadow-sm shadow-[#2F3E35]/5">
 <div class="sm:p-7 pt-6 pr-6 pb-6 pl-6">
-<div class="flex overflow-x-auto snap-x w-full pt-8 pr-4 pb-12 pl-4 gap-x-6 gap-y-6" style="scrollbar-width: none; -ms-overflow-style: none">
-<style class="">
-    [data-element-id="aura-emjx5p4sznd9ov8b"]::-webkit-scrollbar {
-      display: none;
-    }
+<div class="testimonials-scroll flex overflow-x-auto snap-x w-full pt-8 pr-4 pb-12 pl-4 gap-x-6 gap-y-6" style="scrollbar-width: thin; -ms-overflow-style: auto; cursor: grab;">
+<style>
+    .testimonials-scroll::-webkit-scrollbar { height: 6px; }
+    .testimonials-scroll::-webkit-scrollbar-track { background: rgba(47,62,53,.05); border-radius: 3px; }
+    .testimonials-scroll::-webkit-scrollbar-thumb { background: rgba(47,62,53,.2); border-radius: 3px; }
+    .testimonials-scroll::-webkit-scrollbar-thumb:hover { background: rgba(47,62,53,.35); }
+    .testimonials-scroll:active { cursor: grabbing; }
   </style>
 <!-- Card 1 -->
 <div class="group relative w-[18rem] shrink-0 snap-center flex flex-col justify-between rounded-3xl border border-[#2F3E35]/10 bg-white/60 p-6 shadow-sm shadow-[#2F3E35]/5 backdrop-blur-sm transition-all duration-500 ease-out hover:scale-[1.08] hover:bg-white hover:shadow-2xl hover:shadow-[#2F3E35]/10 hover:border-[#2F3E35]/20 hover:z-10 cursor-default">
@@ -829,4 +831,24 @@
       form.reset();
     });
   </script>
+<script>
+(function(){
+  var el=document.querySelector('.testimonials-scroll');
+  if(!el)return;
+  var isDown=false,startX,scrollLeft;
+  el.addEventListener('mousedown',function(e){
+    isDown=true;el.style.cursor='grabbing';
+    startX=e.pageX-el.offsetLeft;
+    scrollLeft=el.scrollLeft;
+  });
+  el.addEventListener('mouseleave',function(){isDown=false;el.style.cursor='grab'});
+  el.addEventListener('mouseup',function(){isDown=false;el.style.cursor='grab'});
+  el.addEventListener('mousemove',function(e){
+    if(!isDown)return;
+    e.preventDefault();
+    var x=e.pageX-el.offsetLeft;
+    el.scrollLeft=scrollLeft-(x-startX)*1.5;
+  });
+})();
+</script>
 </body></html>
